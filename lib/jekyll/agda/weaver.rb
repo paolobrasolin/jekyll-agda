@@ -74,7 +74,7 @@ module Jekyll
       end
 
       def elaborate_extra_dependency(name)
-        return unless Pathname.new(WORK_DIR).join(name).exists?
+        return unless Pathname.new(WORK_DIR).join(name).exist?
         @site.pages << BrowsablePage.new(@site, @site.source, WORK_DIR, name)
       end
     end
