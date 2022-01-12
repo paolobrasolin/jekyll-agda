@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  main:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+        ruby: ["2.3", "2.4", "2.5", "2.6", "2.7", "3.0", "3.1"]
+        include:
+          - os: ubuntu-latest
+            ruby: "2.7"
+            coverage: true
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ./.github/actions/setup-ruby
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          cache-key: gems-${{ matrix.os }}-${{ matrix.ruby }}-${{ hashFiles('Gemfile', 'jekyll-agda.gemspec') }}
+          cache-restore-keys: gems-${{ matrix.os }}-${{ matrix.ruby }}-
+
+      - name: Run tests
+        run: bundle exec rspec
+
+      - name: Test and publish coverage to Code Climate
+        uses: paambaati/codeclimate-action@v3.0.0
+        if: ${{ matrix.coverage && github.ref == 'refs/heads/main' }}
+        env:
+          CC_TEST_REPORTER_ID: 9a680f83c1bb0474c7c92fd708d53f45fbebd500a5229b28f6267dd45d3ad2b2
+        with:
+          coverageCommand: bundle exec rspec
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
