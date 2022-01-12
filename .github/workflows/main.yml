@@ -10,7 +10,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+        os:
+          - "ubuntu-latest"
+          # Agda binaries are not readily available for MacOS and Win, so let's skip them for now.
+          # - "macos-latest"
+          # - "windows-latest"
         ruby: ["2.6", "2.7", "3.0", "3.1"]
         include:
           - os: ubuntu-latest
@@ -27,6 +31,10 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           cache-key: gems-${{ matrix.os }}-${{ matrix.ruby }}-${{ hashFiles('Gemfile', 'jekyll-agda.gemspec') }}
           cache-restore-keys: gems-${{ matrix.os }}-${{ matrix.ruby }}-
+
+      - name: Install Agda (Ubuntu)
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: sudo apt-get install -y agda-bin
 
       - name: Run tests
         run: bundle exec rspec
