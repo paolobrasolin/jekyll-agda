@@ -10,6 +10,10 @@ module Jekyll
           output_ext: output_ext,
         }
       end
+
+      def render_with_liquid?
+        false
+      end
     end
   end
 end
