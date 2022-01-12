@@ -27,3 +27,5 @@
 ## Usage
 
 ## Acknowledgements
+
+- Thanks to [@conal](https://github.com/conal) for [prompting me with the idea](https://twitter.com/conal/status/1479884896864591874).
