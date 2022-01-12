@@ -1,40 +1,29 @@
-# Jekyll::Agda
+# jekyll-agda
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jekyll/agda`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![CI tests status badge][build-shield]][build-url]
+[![Latest release badge][rubygems-shield]][rubygems-url]
+[![License badge][license-shield]][license-url]
+[![Maintainability badge][cc-maintainability-shield]][cc-maintainability-url]
+[![Test coverage badge][cc-coverage-shield]][cc-coverage-url]
 
-TODO: Delete this and the text above, and describe your gem
+[build-shield]: https://img.shields.io/github/workflow/status/paolobrasolin/jekyll-agda/CI/main?label=tests&logo=github
+[build-url]: https://github.com/paolobrasolin/jekyll-agda/actions/workflows/main.yml "CI tests status"
+[rubygems-shield]: https://img.shields.io/gem/v/jekyll-agda?logo=ruby
+[rubygems-url]: https://rubygems.org/gems/jekyll-agda "Latest release"
+[license-shield]: https://img.shields.io/github/license/paolobrasolin/jekyll-agda
+[license-url]: https://github.com/paolobrasolin/jekyll-agda/blob/main/LICENSE "License"
+[cc-maintainability-shield]: https://img.shields.io/codeclimate/maintainability/paolobrasolin/jekyll-agda?logo=codeclimate
+[cc-maintainability-url]: https://codeclimate.com/github/paolobrasolin/jekyll-agda "Maintainability"
+[cc-coverage-shield]: https://img.shields.io/codeclimate/coverage/paolobrasolin/jekyll-agda?logo=codeclimate&label=test%20coverage
+[cc-coverage-url]: https://codeclimate.com/github/paolobrasolin/jekyll-agda/coverage "Test coverage"
 
-## Installation
+`jekyll-agda` is a [Jekyll][jekyll-url] plugin which allows you to use literate [Agda][agda-url] for your website and take full advantage of its highlighting and hyperlinking features.
 
-Add this line to your application's Gemfile:
+[jekyll-url]: https://jekyllrb.com/
+[agda-url]: https://github.com/agda/agda
 
-```ruby
-gem 'jekyll-agda'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install jekyll-agda
+## Getting started
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyll-agda.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## Acknowledgements
