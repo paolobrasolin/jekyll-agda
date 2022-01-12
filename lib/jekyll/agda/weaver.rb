@@ -39,6 +39,7 @@ module Jekyll
         elaborate_resources
         @dependencies_list.uniq!
         elaborate_dependencies
+        elaborate_extra_dependency("Agda.css")
       end
 
       private
@@ -70,6 +71,11 @@ module Jekyll
           page = BrowsablePage.new(@site, @site.source, WORK_DIR, name)
           @site.pages << page
         end
+      end
+
+      def elaborate_extra_dependency(name)
+        return unless Pathname.new(WORK_DIR).join(name).exists?
+        @site.pages << BrowsablePage.new(@site, @site.source, WORK_DIR, name)
       end
     end
   end
