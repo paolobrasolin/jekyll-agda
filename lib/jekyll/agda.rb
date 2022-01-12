@@ -1,8 +1,6 @@
 require "jekyll/agda/version"
+require "jekyll/agda/weaver"
 
-module Jekyll
-  module Agda
-    class Error < StandardError; end
-    # Your code goes here...
-  end
+Jekyll::Hooks.register :site, :post_read do |site|
+  Jekyll::Agda::Weaver.new(site).execute
 end
