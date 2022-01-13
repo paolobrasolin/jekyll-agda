@@ -17,6 +17,7 @@ module Jekyll
         @work_dir = Pathname.new(work_dir)
         @digest = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".md5"))
         @target = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".md"))
+        @extras = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".dep"))
         @dependencies = []
         @successful = nil
       end
@@ -24,7 +25,11 @@ module Jekyll
       def execute
         old_hash = @digest.exist? ? @digest.read : nil
         new_hash = Digest::MD5.hexdigest(@resource.content)
-        return if new_hash == old_hash
+        if new_hash == old_hash
+          @successful = true
+          @dependencies = Marshal.load(@extras.read)
+          return
+        end
 
         log_takeoff
         stdout, _stderr, status = run_agda
@@ -32,6 +37,7 @@ module Jekyll
         if (@successful = status.success?)
           @digest.write(new_hash)
           @dependencies = stdout.scan(RE_AGDA_GENERATED_HTML_PATH)
+          @extras.write(Marshal.dump(@dependencies))
           log_success
         else
           log_failure
