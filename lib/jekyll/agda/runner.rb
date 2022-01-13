@@ -9,15 +9,17 @@ module Jekyll
       RE_LAGDA_MD_EXT = /\.lagda\.md$/i
       RE_AGDA_GENERATED_HTML_PATH = /(?<=\().*?.html(?=\))/
 
-      attr_reader :source, :target, :dependencies, :successful
+      attr_reader :target, :dependencies, :successful
 
       def initialize(resource, work_dir)
         @resource = resource
         @source = Pathname.new(@resource.path)
+
         @work_dir = Pathname.new(work_dir)
         @digest = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".md5"))
         @target = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".md"))
         @extras = @work_dir.join(@source.basename.sub(RE_LAGDA_MD_EXT, ".dep"))
+
         @dependencies = []
         @successful = nil
       end
@@ -27,9 +29,9 @@ module Jekyll
 
         if [@digest, @target, @extras].all?(:exist?)
           if new_hash == @digest.read
-          @successful = true
-          @dependencies = Marshal.load(@extras.read)
-          return
+            @successful = true
+            @dependencies = Marshal.load(@extras.read)
+            return
           end
         end
 
