@@ -23,12 +23,14 @@ module Jekyll
       end
 
       def execute
-        old_hash = @digest.exist? ? @digest.read : nil
         new_hash = Digest::MD5.hexdigest(@resource.content)
-        if new_hash == old_hash
+
+        if [@digest, @target, @extras].all?(:exist?)
+          if new_hash == @digest.read
           @successful = true
           @dependencies = Marshal.load(@extras.read)
           return
+          end
         end
 
         log_takeoff
