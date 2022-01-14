@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   # spec.description   = ""
   spec.homepage = GH_URL
   spec.license = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
 
   spec.metadata = {
     "bug_tracker_uri" => "#{GH_URL}/issues",
