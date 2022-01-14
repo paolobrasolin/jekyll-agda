@@ -9,7 +9,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
-      Agda_datadir: ${{ github.workspace }}/Agda-nightly/data
+      Agda_datadir: ${{ github.workspace }}/vendor/Agda-nightly/data
 
     steps:
       - name: Checkout repo
@@ -17,18 +17,19 @@ jobs:
 
       - name: Install jekyll-agda system dependencies
         run: |
+          mkdir -p vendor
+          cd vendor
+
           wget --quiet https://github.com/agda/agda/releases/download/nightly/Agda-nightly-linux.tar.xz
           tar -xf Agda-nightly-linux.tar.xz
 
-          pushd Agda-nightly
-          ./check_agda.sh
-          popd
+          # pushd Agda-nightly
+          # ./check_agda.sh
+          # popd
 
-          echo $Agda_datadir
           echo "$(pwd)/Agda-nightly/bin" >> $GITHUB_PATH
 
           wget --quiet -O agda-stdlib.tar.gz https://github.com/agda/agda-stdlib/archive/v1.7.tar.gz
-
           tar -zxf agda-stdlib.tar.gz
 
           mkdir -p $HOME/.agda
