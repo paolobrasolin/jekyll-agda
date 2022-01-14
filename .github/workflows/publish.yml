@@ -1,0 +1,65 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - jekyll
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      Agda_datadir: ${{ github.workspace }}/Agda-nightly/data
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install jekyll-agda system dependencies
+        run: |
+          wget --quiet https://github.com/agda/agda/releases/download/nightly/Agda-nightly-linux.tar.xz
+          tar -xf Agda-nightly-linux.tar.xz
+
+          pushd Agda-nightly
+          ./check_agda.sh
+          popd
+
+          echo $Agda_datadir
+          echo "$(pwd)/Agda-nightly/bin" >> $GITHUB_PATH
+
+          wget --quiet -O agda-stdlib.tar.gz https://github.com/agda/agda-stdlib/archive/v1.7.tar.gz
+
+          tar -zxf agda-stdlib.tar.gz
+
+          mkdir -p $HOME/.agda
+          echo $(pwd)/agda-stdlib-1.7/standard-library.agda-lib > $HOME/.agda/libraries
+          echo standard-library > $HOME/.agda/defaults
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: gems-${{ hashFiles('Gemfile.lock') }}
+          restore-keys: gems-
+
+      - name: Install Ruby gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Build
+        run: bundle exec jekyll build
+
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
+        if: success() && github.event_name != 'schedule'
+        with:
+          target_branch: gh-pages
+          build_dir: _site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
