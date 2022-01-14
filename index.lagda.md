@@ -21,5 +21,38 @@ data ℕ : Set where
   suc : ℕ → ℕ
 ```
 
-Is `Set` clickable? Yes it is.
-And the other keywords too!
+Cool! Now let's define addition inductively:
+
+```agda
+_+_ : ℕ → ℕ → ℕ
+zero + n = n
+(suc m) + n = suc (m + n)
+```
+
+Note that `ℕ`, `zero` and `suc` are hyperlinked to their definition above.
+
+As our last trick, let's import some tools for equational reasoning and check that `2 + 2` is indeed `4`.
+
+```agda
+import Relation.Binary.PropositionalEquality as Eq
+open Eq using (_≡_)
+open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; _∎)
+
+{-# BUILTIN NATURAL ℕ #-}
+
+_ : 2 + 2 ≡ 4
+_ = begin
+  2 + 2                                 ≡⟨⟩
+  (suc (suc zero)) + (suc (suc zero))   ≡⟨⟩
+  suc ((suc zero) + (suc (suc zero)))   ≡⟨⟩
+  suc (suc (zero + (suc (suc zero))))   ≡⟨⟩
+  suc (suc (suc (suc zero)))            ≡⟨⟩
+  4                                     ∎
+```
+
+Note that all imported modules, keywords and operators are hyperlinked to their definition in the standard library.
+Try jumping into the rabbit hole and navigate around it!
+
+This concludes the demonstration.
+
+I hope `jekyll-agda` can help you. ❤️
