@@ -96,6 +96,7 @@ Here is a roadmap of features I think would be useful.
   - Currently all pages are compiled as independent "root" files, so Agda is not affected by Jekyll's conventions as long as you don't define a `module` in your files
   - Structuring code in multiple files/modules is doable but will require some clever dependency management to avoid redundant compilations
   - Ideally, we'd like complete freedom in structuring code to do stuff like multiple pages corresponding to modules, or a series of posts in which later ones import the previous ones
+- Find a way to support highlighting and hyperlinking for inline code, i.e. for markdown fragments like `` `Set`{:.agda} ``.
 
 Of course any feedback is welcome!
 
