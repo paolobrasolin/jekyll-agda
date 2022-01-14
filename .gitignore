@@ -1,0 +1,6 @@
+_site/
+*.agdai
+.agda-html/
+
+.ruby-*
+Gemfile.lock

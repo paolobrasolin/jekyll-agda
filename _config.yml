@@ -1,0 +1,24 @@
+title: jekyll-agda
+description: Use literate Agda in your Jekyll website!
+baseurl: &baseurl "/jekyll-agda"
+
+remote_theme: pages-themes/cayman@v0.2.0
+
+plugins:
+  - jekyll-remote-theme
+
+exclude:
+  # non default values:
+  - "*.agdai"
+  - .agda-html
+  # default values:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
