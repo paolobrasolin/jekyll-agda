@@ -57,7 +57,7 @@ Assuming you have a working [Agda][agda-url] installation and a [Jekyll][jekyll-
 That's it!
 You can now write your posts and pages using [literate Agda][lagda-url].
 
-Here is a sample post you can save as `_posts/2021-01-13-foobar.lagda.md` to get started:
+Here is a sample post you can save as `_posts/2022-01-14-foobar.lagda.md` to get started:
 
 ````
 ---
