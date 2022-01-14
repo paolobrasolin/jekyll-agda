@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Paolo Brasolin"]
   spec.email = ["paolo.brasolin@gmail.com"]
 
-  spec.summary = "Jekyll plugin to produce browsable literate Agda"
-  # spec.description   = ""
+  spec.summary = "Use literate Agda in your Jekyll website!"
+  spec.description = "This Jekyll plugin allows to you write literate Agda. It will compile your code using Agda itself, producing beautifully highlighted and hyperlinked pages."
   spec.homepage = GH_URL
   spec.license = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
