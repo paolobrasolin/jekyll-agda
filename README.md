@@ -80,7 +80,10 @@ And the other keywords too!
 
 Right now this plugin is an [MVP][mvp-url] and accepts no configuration, so [Getting started](#getting-started) covers pretty much everything about its usage.
 
-This will change proceeding along the [Roadmap](#roadmap).
+The only caveat is: **write your code in unnamed independent modules** to be totally safe.
+Otherwise, Agda and Jekyll naming conventions _might_ be at odds.
+You can definitely try do more complex stuff though!
+I simply haven't given this enough thought yet to clearly spell out the details (see last point of the [Roadmap](#roadmap)).
 
 ## Roadmap
 
